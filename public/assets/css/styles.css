@@ -522,6 +522,7 @@ a.bg-danger:hover {
 	background-color: #fff;
 	padding: 0;
 	display: none;
+
 }
 
 .sidebar form {
@@ -535,7 +536,7 @@ a.bg-danger:hover {
 		display: block;
   		position: fixed;
 		top: 50px;
-		bottom: 0;
+		bottom: 300px;
 		left: 0;
 		z-index: 1000;
 		display: block;
@@ -666,85 +667,7 @@ h1.page-header {
 	width: 120px;
 }
 
-#easypiechart-blue .percent { color: #30a5ff;}
-#easypiechart-teal .percent { color: #1ebfae;}
-#easypiechart-orange .percent { color: #ffb53e;}
-#easypiechart-red .percent { color: #ef4040;}
 
-/*Calendar Widget*/
-
-#calendar, .datepicker-inline {
-	width: 100%;
-}
-
-#calendar table {
-	width: 100%;
-}
-
-.datepicker table tr td.old,
-.datepicker table tr td.new {
-	color: rgba(255, 255, 255, .50);
-}
-
-.datepicker table tr td.active,
-.datepicker table tr td.active:hover,
-.datepicker table tr td.active.disabled,
-.datepicker table tr td.active.disabled:hover,
-.datepicker table tr td.active:hover,
-.datepicker table tr td.active:hover:hover,
-.datepicker table tr td.active.disabled:hover,
-.datepicker table tr td.active.disabled:hover:hover,
-.datepicker table tr td.active:focus,
-.datepicker table tr td.active:hover:focus,
-.datepicker table tr td.active.disabled:focus,
-.datepicker table tr td.active.disabled:hover:focus,
-.datepicker table tr td.active:active,
-.datepicker table tr td.active:hover:active,
-.datepicker table tr td.active.disabled:active,
-.datepicker table tr td.active.disabled:hover:active,
-.datepicker table tr td.active.active,
-.datepicker table tr td.active:hover.active,
-.datepicker table tr td.active.disabled.active,
-.datepicker table tr td.active.disabled:hover.active,
-.open .dropdown-toggle.datepicker table tr td.active,
-.open .dropdown-toggle.datepicker table tr td.active:hover,
-.open .dropdown-toggle.datepicker table tr td.active.disabled,
-.open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
-	color: #ffffff;
-	background-color: rgba(0, 0, 0, .5);
-	border-color: #285e8e;
-}
-
-.datepicker table tr td span:hover,
-.datepicker thead tr:first-child th:hover,
-.datepicker tfoot tr th:hover,
-.datepicker table tr td.day:hover,
-.datepicker table tr td.day.focused {
-	background: rgba(0, 0, 0, 0.25);
-}
-
-.panel-heading .glyphicon {
-	margin-right: 10px;
-}
-
-/*Todo List Widget*/
-
-.todo-list-item .glyphicon { 
-	margin-right:5px; 
-	color: #9fadbb; 
-}
-
-.todo-list-item .glyphicon:hover { 
-	margin-right:5px; 
-	color: #1b3548; 
-}
-
-.todo-list { 
-	padding: 0;
-	margin: -15px;
-	background: #fff;
-	color: #5f6468;
-}
 
 #checkbox {
 	margin: 0;
@@ -775,40 +698,6 @@ h1.page-header {
 	color: #ef4040;
 }
 
-
-/*Chat Widget*/
-
-.chat ul {
-	list-style: none;
-	margin: -15px;
-	padding: 15px;
-}
-
-.chat ul li {
-	margin-bottom: 10px;
-	padding: 15px 5px;
-	border-bottom: 1px solid #eee;
-}
-
-.chat ul li.left .chat-body { margin-left: 100px;}
-.chat ul li.right .chat-body { margin-right: 100px;}
-
-.chat ul li .chat-body p {
-	margin: 0;
-}
-
-.chat ul .glyphicon {
-	margin-right: 5px;
-}
-
-.chat .panel-body {
-	overflow-y: scroll;
-	height: 300px;
-}
-
-.chat-body small {
-	margin-left: 5px;
-}
 
 /*Tables*/
 .table {
@@ -921,6 +810,13 @@ h1.page-header {
 	overflow: scroll;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: red;
+}
 
 
 

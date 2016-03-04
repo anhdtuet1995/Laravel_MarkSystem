@@ -2,12 +2,15 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{URL::asset('assets/css/footer-distributed-with-address-and-phones.css')}}">
+	
 <link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/css/datepicker3.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/css/styles.css')}}" rel="stylesheet">
-
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
 <!--Icons-->
 <script src="{{URL::asset('assets/js/lumino.glyphs.js')}}"></script>
 
@@ -20,40 +23,46 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				@include('includes.nav-bar')
-			</div>
-							
-		</div><!-- /.container-fluid -->
-	</nav>
-		
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<form role="search">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
-			</div>
-		</form>
-		<ul class="nav menu">
-			@role('admin')
-			<li class="active"><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý giáo viên</a></li>
-			<li class=""><a href="{{url('/admin/post')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý điểm</a></li>
-			<li class=""><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Cập nhật kỳ học</a></li>
-			<li role="presentation" class="divider"></li>
-			@endrole
-			@role('teacher')
-			@endrole
-		</ul>
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					@include('includes.nav-bar')
+				</div>
+								
+			</div><!-- /.container-fluid -->
+		</nav>
+			
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<form role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+			</form>
+			<ul class="nav menu">
+				@role('admin')
+				<li class="active"><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý giáo viên</a></li>
+				<li class=""><a href="{{url('/admin/post')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý điểm</a></li>
+				<li class=""><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Cập nhật kỳ học</a></li>
+				<li role="presentation" class="divider"></li>
+				@endrole
+				@role('teacher')
+				@endrole
+			</ul>
 
-	</div><!--/.sidebar-->
-	
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">	
-		@yield('content')
+		</div><!--/.sidebar-->
+		
+		<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">	
+			@yield('content')
+		</div>
+		
+		</div>	<!--/.main-->
+	<header>
+	<div class="col-md-12">
+			@include('includes.footer')
+		
 	</div>
 	
-	</div>	<!--/.main-->
-
 	<script src="{{URL::asset('assets/js/jquery-1.11.1.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/bootstrap-datepicker.js')}}"></script>
