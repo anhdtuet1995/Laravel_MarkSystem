@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('title') Users @stop
 
@@ -35,8 +35,20 @@
                 </tr>
                 @endforeach
             </tbody>
-
         </table>
+        <ul class="pagination pull-right">
+            @if($users->currentPage() > 1)
+            <li><a href="{{ $users->url($users->currentPage() -1 )}}">Prev</a></li>
+            @endif
+            @for($i = 1; $i <= $users->lastPage(); $i++)
+            <li class="{!! $users->currentPage() == $i ? 'active' : '' !!}">
+                <a href="{!! $users->url($i) !!}">{{ $i }}</a>
+            </li>
+            @endfor
+            @if($users->currentPage() < $users->lastPage())
+            <li><a href="{{ $users->url($users->currentPage() +1 )}}">Next</a></li>
+            @endif
+         </ul>
     </div>
 
     <a href="{{url('admin/user/create')}}" class="btn btn-success">Thêm giáo viên</a>
