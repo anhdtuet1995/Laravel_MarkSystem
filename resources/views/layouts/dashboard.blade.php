@@ -11,6 +11,7 @@
 <link href="{{URL::asset('assets/css/styles.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <!--Icons-->
 <script src="{{URL::asset('assets/js/lumino.glyphs.js')}}"></script>
 
@@ -41,7 +42,7 @@
 			</form>
 			<ul class="nav menu">
 				@role('admin')
-				<li class="active"><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý giáo viên</a></li>
+				<li class=""><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý giáo viên</a></li>
 				<li class=""><a href="{{url('/admin/post')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý điểm</a></li>
 				<li class=""><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Cập nhật kỳ học</a></li>
 				<li role="presentation" class="divider"></li>
@@ -67,6 +68,19 @@
 	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/bootstrap-datepicker.js')}}"></script>
 	<script>
+		var menu = document.querySelector('.menu');
+		var anchors = menu.getElementsByTagName('a');
+
+		for (var i = 0; i < anchors.length; i += 1) {
+		  anchors[i].addEventListener('click', function() { clickHandler(anchors[i]) }, false);
+		}
+
+		function clickHandler(anchor) {
+		  var hasClass = anchor.getAttribute('class');
+		  if (hasClass !== 'active') {
+		    anchor.setAttribute('class', 'active');
+		  }
+}
 
 		!function ($) {
 		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
