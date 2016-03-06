@@ -6,28 +6,6 @@
 @role('admin')
 <div class="col-lg-10 col-lg-offset-1" >
     <h1><i class="fa fa-folder"></i> Quản lý file điểm </h1>
-
-    <form action="{{url('admin/post/add')}}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        Năm học: <select id="year" name="year">
-        <option value="0">Lựa chọn năm học</option>
-        @foreach($years as $year)
-        <option value="{{$year->id}}">{{$year->year_title}}</option>
-        @endforeach
-        </select><br>
-        Kỳ học: <select name="semester" id="semester" onChange="">
-        <option value="0">Lựa chọn học kỳ</option>
-        </select><br>
-        Môn học: <select name="subject" id="subject">
-        <option value="0">Lựa chọn môn học</option>
-        </select>
-        <br>
-        Nhập tên file:
-        <input type="text" name="name"><br>
-        <input type="file" name="filefield"><br>
-        <input type="submit">
-    </form>
-    
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
 
@@ -44,9 +22,7 @@
             <tbody>
                 @foreach($entries as $entry)
                 
-                <tr>
-                    
-                    
+                <tr> 
                     <td>{{ $entry->getSubject($entry->subject_id)->subject_title}}</td>
                     <td>{{ $entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title}}</td>
                     <td>{{ $entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->semester_title}}</td>
@@ -62,7 +38,7 @@
                 @endforeach
             </tbody>
         </table>
-        <ul class="pagination pull-left">
+        <ul class="pagination pull-right">
             @if($entries->currentPage() > 1)
             <li><a href="{{ $entries->url($entries->currentPage() -1 )}}">Prev</a></li>
             @endif
@@ -77,6 +53,28 @@
         </ul>
     </div>
     
+
+    <form action="{{url('admin/post/add')}}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <h1><i class="fa fa-folder"></i> Tải lên file điểm </h1>
+        Năm học: <select id="year" name="year" class="form-control">
+        <option value="0">Lựa chọn năm học</option>
+        @foreach($years as $year)
+        <option value="{{$year->id}}">{{$year->year_title}}</option>
+        @endforeach
+        </select><br>
+        Kỳ học: <select name="semester" id="semester" class="form-control">
+        <option value="0">Lựa chọn học kỳ</option>
+        </select><br>
+        Môn học: <select name="subject" id="subject" class="form-control">
+        <option value="0">Lựa chọn môn học</option>
+        </select>
+        <br>
+        Nhập tên file:
+        <input type="text" name="name"><br>
+        <input type="file" name="filefield"><br>
+        <input type="submit">
+    </form>
 </div>
 
 

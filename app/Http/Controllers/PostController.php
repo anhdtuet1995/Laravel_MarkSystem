@@ -26,7 +26,7 @@ class PostController extends Controller
 	 */
 	public function index()
 	{
-		$entries = Fileentry::paginate(2);
+		$entries = Fileentry::paginate(5);
 		$years = Year::all();
 		
 		return view('admins.posts.home')->with([
@@ -80,10 +80,10 @@ class PostController extends Controller
 	}
 
 	public function update($id){
-		$fname = Request::input('name');
+		$fname = \Input::get('name');
 		$fileentry = Fileentry::find($id);
-		if(Request::hasFile('filefield')){
-			$file = Request::file('filefield');
+		if(\Input::hasFile('filefield')){
+			$file = \Input::file('filefield');
 			$extension = $file->getClientOriginalExtension();
 			Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
 			$fileentry->filename = $file->getFilename().'.'.$extension;
@@ -91,7 +91,7 @@ class PostController extends Controller
 			$fileentry->original_filename = $fname;
 		}
 		$fileentry->save();
-		return redirect('post');
+		return redirect('admin/post');
 	}
 
 	public function subMenu(){

@@ -59,10 +59,7 @@
 		
 		</div>	<!--/.main-->
 	<header>
-	<div class="col-md-12">
-			@include('includes.footer')
-		
-	</div>
+	
 	
 	<script src="{{URL::asset('assets/js/jquery-1.11.1.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
