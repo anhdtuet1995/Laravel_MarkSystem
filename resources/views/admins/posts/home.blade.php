@@ -27,30 +27,56 @@
         <input type="file" name="filefield"><br>
         <input type="submit">
     </form>
+    
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
 
-    <h1> Pictures list</h1>
-     <div class="row">
-            <ul>
-     @foreach($entries as $entry)
-            <li><a href="{{url('admin/post/get/')."/".$entry->filename}}" title="">{{$entry->original_filename}}</a>
-            <a href="{{url('admin/post/edit')."/".$entry->id}}">Edit</a></li>
-            <a href="{{url('admin/post/delete/')."/".$entry->filename}}">Delete</a></li>
-     @endforeach
-     <br>
-     <ul class="pagination pull-left">
-        @if($entries->currentPage() > 1)
-        <li><a href="{{ $entries->url($entries->currentPage() -1 )}}">Prev</a></li>
-        @endif
-        @for($i = 1; $i <= $entries->lastPage(); $i++)
-        <li class="{!! $entries->currentPage() == $i ? 'active' : '' !!}">
-            <a href="{!! $entries->url($i) !!}">{{ $i }}</a>
-        </li>
-        @endfor
-        @if($entries->currentPage() < $entries->lastPage())
-        <li><a href="{{ $entries->url($entries->currentPage() +1 )}}">Next</a></li>
-        @endif
-     </ul>
-     </div>
+            <thead>
+                <tr>
+                    <th>Môn học</th>
+                    <th>Năm học</th>
+                    <th>Học kỳ</th>
+                    <th>File điểm thi</th>
+                    <th>Ngày tạo file</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach($entries as $entry)
+                
+                <tr>
+                    
+                    
+                    <td>{{ $entry->getSubject($entry->subject_id)->subject_title}}</td>
+                    <td>{{ $entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title}}</td>
+                    <td>{{ $entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->semester_title}}</td>
+                    <td><a href="{{url('admin/post/get/')."/".$entry->filename}}" title="">{{$entry->original_filename}}</a></td>
+                    <td>{{ $entry->created_at->format('F d, Y h:ia') }}</td>
+                    <td>
+                        <a href="{{url('admin/post/edit')."/".$entry->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
+                        {{ Form::open(['url' => 'admin/post/' . $entry->id, 'method' => 'DELETE']) }}
+                        {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
+                        {{ Form::close() }}
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <ul class="pagination pull-left">
+            @if($entries->currentPage() > 1)
+            <li><a href="{{ $entries->url($entries->currentPage() -1 )}}">Prev</a></li>
+            @endif
+            @for($i = 1; $i <= $entries->lastPage(); $i++)
+            <li class="{!! $entries->currentPage() == $i ? 'active' : '' !!}">
+                <a href="{!! $entries->url($i) !!}">{{ $i }}</a>
+            </li>
+            @endfor
+            @if($entries->currentPage() < $entries->lastPage())
+            <li><a href="{{ $entries->url($entries->currentPage() +1 )}}">Next</a></li>
+            @endif
+        </ul>
+    </div>
+    
 </div>
 
 
