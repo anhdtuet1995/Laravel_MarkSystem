@@ -44,8 +44,28 @@
 				@role('admin')
 				<li class=""><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý giáo viên</a></li>
 				<li class=""><a href="{{url('/admin/post')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý điểm</a></li>
-				<li class=""><a href="{{url('/admin/user')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Cập nhật kỳ học</a></li>
-				<li role="presentation" class="divider"></li>
+				<li class="parent ">
+					<a href="#">
+						<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Cập nhật CSDL 
+					</a>
+					<ul class="children collapse" id="sub-item-1">
+						<li>
+							<a class="" href="{{url('admin/year')}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Quản lý năm học
+							</a>
+						</li>
+						<li>
+							<a class="" href="{{url('admin/semester')}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Quản lý kỳ học
+							</a>
+						</li>
+						<li>
+							<a class="" href="{{url('admin/subject')}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Quản lý các môn học
+							</a>
+						</li>
+					</ul>
+				</li>
 				@endrole
 				@role('teacher')
 				@endrole

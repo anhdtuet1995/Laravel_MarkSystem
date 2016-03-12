@@ -12,7 +12,11 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['prefix' => 'admin'], function () {
     	Route::resource('/user', 'UserController');
-    	Route::get('/post', 'PostController@index');
+    	Route::resource('/year', 'YearController');
+        Route::resource('/semester', 'SemesterController');
+        Route::resource('/subject', 'SubjectController');
+        
+        Route::get('/post', 'PostController@index');
 
         Route::get('/post/ajax-submenu', 'PostController@subMenu');
         Route::get('/post/ajax-submenu2', 'PostController@subMenu2');

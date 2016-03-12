@@ -16,6 +16,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('users')->insert([
+        'name' => 'Administrator',
+        'email' => 'admin@gmail.com',
+        'password' => Hash::make('123456')
+      ]);
+
+      DB::table('users')->insert([
+        'name' => 'Đào Tuấn Anh',
+        'email' => 'anhdt@gmail.com',
+        'password' => Hash::make('123456')
+      ]);
+
+      DB::table('roles')->insert([
+        'name' => 'admin',
+        'display_name' => 'Administrator',
+      ]);
+
+      DB::table('roles')->insert([
+        'name' => 'teacher',
+        'display_name' => 'Teacher',
+      ]);
+
+      DB::table('role_user')->insert([
+        'user_id' => 1,
+        'role_id' => 1
+      ]);
+
+      DB::table('role_user')->insert([
+        'user_id' => 2,
+        'role_id' => 2
+      ]);
+
         // $this->call(UserTableSeeder::class);
     	DB::table('years')->insert([
     		'year_title' => '2014'

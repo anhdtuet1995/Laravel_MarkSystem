@@ -15,4 +15,8 @@ class Controller extends BaseController
 	{
 		$this->middleware('auth');
 	}
+
+	public function index(){
+		return view('welcome');
+	}
 }
