@@ -22,9 +22,10 @@ class SubjectController extends Controller
     	$i = 1;
     	$semesters = Semester::all();
     	$subjects = Subject::all();
-
+        $years = Year::all();
     	return view('admins.subjects.home')->with([
     		'i' => $i,
+            'years' => $years,
     		'semesters' => $semesters,
     		'subjects' => $subjects
     	]);
@@ -55,5 +56,13 @@ class SubjectController extends Controller
         else{
             return redirect('teacher/subject');
         }
+    }
+
+    public function subMenu(){
+        $year_id = Input::get('year_id');
+
+        $semesters = Semester::where('year_id', '=', $year_id)->get();
+        
+        return response()->json($semesters);
     }
 }

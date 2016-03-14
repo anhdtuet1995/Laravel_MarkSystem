@@ -69,11 +69,15 @@
 	@role('teacher')
     {{ Form::open(['role' => 'form', 'url' => '/teacher/subject']) }}
 	@endrole
-    Lựa chọn học kỳ:
-    <select class='form-control' name="semester" >
-    	@foreach($semesters as $semester)
-		<option value="{{$semester->id}}">{{$semester->semester_title}}</option>}
+	Lựa chọn năm học:
+    <select class='form-control' name="year" id="year">
+    	@foreach($years as $year)
+		<option value="{{$year->id}}">{{$year->year_title}}</option>}
     	@endforeach
+    </select>
+    Lựa chọn học kỳ:
+    <select class='form-control' name="semester" id="semester" >
+		<option value="0">Lựa chọn kỳ học</option>}
     </select>
 	
 	<div class='form-group'>
@@ -92,4 +96,20 @@
 
     {{ Form::close() }}
 </div>
+
+<script type="text/javascript" charset="utf-8" async defer>
+    $('#year').on('change', function(e){
+        console.log(e);
+
+        var year_id = e.target.value;
+
+        $.get('{{url('admin/post/ajax-submenu')}}' + '?year_id=' + year_id, function(data){
+            $('#semester').empty();
+            $('#semester').append('<option value=0>Lựa chọn học kỳ</option>');
+            $.each(data, function(index, semesterObj){
+                $('#semester').append('<option value='+semesterObj.id+'>'+semesterObj.semester_title+'</option>');
+            });
+        });
+    });
+</script>
 @stop

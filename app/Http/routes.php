@@ -101,7 +101,7 @@ Route::group(['middleware' => 'web'], function () {
     	Route::resource('/year', 'YearController');
         Route::resource('/semester', 'SemesterController');
         Route::resource('/subject', 'SubjectController');
-        
+        Route::get('/subject/ajax-submenu', 'SubjectController@subMenu');
         Route::get('/post', 'PostController@index');
 
         Route::get('/post/ajax-submenu', 'PostController@subMenu');
