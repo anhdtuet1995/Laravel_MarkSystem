@@ -16,6 +16,7 @@ class CreateFileTable extends Migration
         Schema::create('years', function(Blueprint $table){
             $table->increments('id');
             $table->string('year_title');
+            $table->integer('year_active');
             $table->timestamps();
         });
         //create table for semesters

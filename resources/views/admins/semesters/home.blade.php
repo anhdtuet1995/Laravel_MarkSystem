@@ -22,11 +22,19 @@
 					<td>{{$i++}}</td>
 					<td>{{$sem->semester_title}}</td>
 					<td>{{$sem->getYear($sem->year_id)->year_title}}</td>
-					<td>
+					<td>@role('admin')
 						<a href="{{url('admin/semester/edit')."/".$sem->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
 			            {{ Form::open(['url' => 'admin/semester/' . $sem->id, 'method' => 'DELETE']) }}
 			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
 			            {{ Form::close() }}
+			            @endrole
+			            @role('teacher')
+						<a href="{{url('teacher/semester/edit')."/".$sem->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
+			            {{ Form::open(['url' => 'teacher/semester/' . $sem->id, 'method' => 'DELETE']) }}
+			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
+			            {{ Form::close() }}
+			            @endrole
+
 		            </td>
 		            
 				</tr>
@@ -48,9 +56,12 @@
     @endif
 
     <h1><i class='fa fa-user'></i> Thêm năm học</h1>
-
+	@role('admin')
     {{ Form::open(['role' => 'form', 'url' => '/admin/semester']) }}
-
+	@endrole
+	@role('teacher')
+    {{ Form::open(['role' => 'form', 'url' => '/teacher/semester']) }}
+	@endrole
     Lựa chọn học kỳ:
     <select class='form-control' name="year" >
     	@foreach($years  as $year)

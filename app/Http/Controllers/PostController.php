@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
 use App\Fileentry;
 use App\Year;
 use App\User;
@@ -32,7 +33,6 @@ class PostController extends Controller
 		return view('admins.posts.home')->with([
 			'entries' => $entries,
 			'years' => $years,
-			
 		]);
 	}
 
@@ -46,13 +46,22 @@ class PostController extends Controller
 	}
 
 	public function delete($filename){
-		$entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
-		$entry->delete();
-		Storage::delete($filename);
-		return redirect('admin/post');
+		if(Auth::user()->hasRole('admin')){
+			$entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
+			$entry->delete();
+			Storage::delete($filename);
+			return redirect('admin/post');	
+		}
+		else{
+			$entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
+			$entry->delete();
+			Storage::delete($filename);
+			return redirect('teacher/post');	
+		}
 	}
 
 	public function add() {
+
 		$subject_id = \Input::get('subject');
 		$filename = \Input::get('name');
 		$file = \Input::file('filefield');
@@ -70,7 +79,12 @@ class PostController extends Controller
 		$entry->subject_id = $subject_id;
 		$entry->save();
 
-		return redirect('admin/post');
+		if(Auth::user()->hasRole('admin')){
+			return redirect('admin/post');	
+		}
+		else{
+			return redirect('teacher/post');
+		}
 		
 	}
 
@@ -91,7 +105,12 @@ class PostController extends Controller
 			$fileentry->original_filename = $fname;
 		}
 		$fileentry->save();
-		return redirect('admin/post');
+		if(Auth::user()->hasRole('admin')){
+			return redirect('admin/post');	
+		}
+		else{
+			return redirect('teacher/post');
+		}
 	}
 
 	public function subMenu(){

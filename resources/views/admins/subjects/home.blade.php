@@ -18,7 +18,7 @@
 			</thead>
 			<tbody>
 				@foreach($subjects as $subject)
-				<tr>
+				<tr>@role('admin')
 					<td><input type="checkbox" name="selectMany[]" value="{{$subject->id}}"></td>
 					<td>{{$i++}}</td>
 					<th>{{$subject->subject_title}}</th>
@@ -30,7 +30,20 @@
 			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
 			            {{ Form::close() }}
 		            </td>
-		            
+		            @endrole
+		            @role('teacher')
+					<td><input type="checkbox" name="selectMany[]" value="{{$subject->id}}"></td>
+					<td>{{$i++}}</td>
+					<th>{{$subject->subject_title}}</th>
+					<td>{{$subject->getSemester($subject->semester_id)->semester_title}}</td>
+					<td>{{$subject->getSemester($subject->semester_id)->getYear($subject->getSemester($subject->semester_id)->year_id)->year_title}}</td>
+					<td>
+						<a href="{{url('teacher/subject/edit')."/".$subject->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
+			            {{ Form::open(['url' => 'teacher/subject/' . $subject->id, 'method' => 'DELETE']) }}
+			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
+			            {{ Form::close() }}
+		            </td>
+		            @endrole
 				</tr>
 				@endforeach
 			</tbody>
@@ -50,9 +63,12 @@
     @endif
 
     <h1><i class='fa fa-user'></i> Thêm môn học</h1>
-
+	@role('admin')
     {{ Form::open(['role' => 'form', 'url' => '/admin/subject']) }}
-
+	@endrole
+	@role('teacher')
+    {{ Form::open(['role' => 'form', 'url' => '/teacher/subject']) }}
+	@endrole
     Lựa chọn học kỳ:
     <select class='form-control' name="semester" >
     	@foreach($semesters as $semester)

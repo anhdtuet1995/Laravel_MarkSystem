@@ -15,7 +15,7 @@
                 <tr>
                     <th>Họ Tên</th>
                     <th>Email</th>
-                    <th>Ngày tạo tài khoản</th>
+                    <th>Quyền</th>
                     <th></th>
                 </tr>
             </thead>
@@ -25,7 +25,13 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->created_at}}</td>
+                    <td>
+                    @if($user->hasRole('admin'))
+                    {{"Người quản trị"}}
+                    @else
+                    {{"Giáo viên"}}
+                    @endif
+                    </td>
                     <td>
                         <a href="{{url('admin/user') .'/'. $user->id . '/edit'}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
                         {{ Form::open(['url' => 'admin/user/' . $user->id, 'method' => 'DELETE']) }}

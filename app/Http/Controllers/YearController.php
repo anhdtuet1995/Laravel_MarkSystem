@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
 use App\Fileentry;
 use App\Year;
 use App\User;
 use App\Semester;
-use App\Subject;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -36,12 +36,24 @@ class YearController extends Controller
     	$year->year_title = $request->input('year');
     	$year->save();
 
-    	return redirect('admin/year');
+    	if(Auth::user()->hasRole('admin')){
+            return redirect('admin/year');  
+        }
+        else{
+            return redirect('teacher/year');
+        }
     }
 
     public function destroy($id){
     	Year::destroy($id);
 
-    	return redirect('admin/year');
+    	if(Auth::user()->hasRole('admin')){
+            return redirect('admin/year');  
+        }
+        else{
+            return redirect('teacher/year');
+        }
     }
+
+    
 }

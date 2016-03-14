@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 use App\Fileentry;
 use App\Year;
 use App\User;
@@ -38,13 +38,24 @@ class SemesterController extends Controller
     	$sem->year_id = $request->get('year');
 
     	$sem->save();
-    	return redirect('admin/semester');
+        if(Auth::user()->hasRole('admin')){
+            return redirect('admin/semester');  
+        }
+        else{
+            return redirect('teacher/semester');
+        }
+    	
     }
 
     public function destroy($id){
     	Semester::destroy($id);
 
-    	return redirect('admin/semester');
+    	if(Auth::user()->hasRole('admin')){
+            return redirect('admin/semester');  
+        }
+        else{
+            return redirect('teacher/semester');
+        }
     }
 }
 

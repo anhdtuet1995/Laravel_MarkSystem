@@ -50,12 +50,16 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UserTableSeeder::class);
     	DB::table('years')->insert([
-    		'year_title' => '2014'
+        'year_title' => '2015',
+        'year_active' => 1
+      ]);
+
+      DB::table('years')->insert([
+    		'year_title' => '2014',
+        'year_active' => 0
     	]);
 
-    	DB::table('years')->insert([
-    		'year_title' => '2015'
-    	]);
+    	
 
     	DB::table('semesters')->insert([
     		'semester_title' => 'Học kỳ một',

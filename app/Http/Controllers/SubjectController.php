@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 use App\Fileentry;
 use App\Year;
 use App\User;
@@ -38,12 +38,22 @@ class SubjectController extends Controller
     	$subject->semester_id = $request->get('semester');
 
     	$subject->save();
-    	return redirect('admin/subject');
+    	if(Auth::user()->hasRole('admin')){
+            return redirect('admin/subject');  
+        }
+        else{
+            return redirect('teacher/subject');
+        }
     }
 
     public function destroy($id){
     	Subject::destroy($id);
 
-    	return redirect('admin/subject');
+    	if(Auth::user()->hasRole('admin')){
+            return redirect('admin/subject');  
+        }
+        else{
+            return redirect('teacher/subject');
+        }
     }
 }

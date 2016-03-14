@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 Route::get('/', function () {
     $years = Year::all();
     $semester = \Input::get('semester');
-    $results = Subject::all();
+    $results = Subject::where('semester_id', '=', $semester)->get();
     // $fileentries = array();
     // foreach ($results as $re) {
     //     $files = DB::table('fileentries')->where('subject_id', '=', $re->id)->get();
@@ -30,7 +30,10 @@ Route::post('/search', function () {
     $years = Year::all();
     $semester = \Input::get('semester');
     $mamh = \Input::get('mamh');
-    $results = Subject::where('semester_id', '=', $semester)->get();
+    if($mamh == null) $results = Subject::where('semester_id', '=', $semester)->get();
+    else{
+        $results = Subject::where('semester_id', '=', $semester)->where('subject_code', 'like', '%'.$mamh.'%')->get();
+    }
     $i = 0;
     // $fileentries = array();
     // foreach ($results as $re) {
@@ -81,7 +84,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/post/ajax-submenu', 'PostController@subMenu');
         Route::get('/post/ajax-submenu2', 'PostController@subMenu2');
 
-        Route::get('/post/delete/{filename}', [
+        Route::delete('/post/delete/{filename}', [
             'as' => 'deleteentry', 'uses' => 'PostController@delete']);
         Route::get('/post/get/{filename}', [
             'as' => 'getentry', 'uses' => 'PostController@get']);
@@ -95,7 +98,27 @@ Route::group(['middleware' => 'web'], function () {
             ]);
     });
     Route::group(['prefix' => 'teacher'], function () {
-    	Route::resource('/post', 'PostController');
+    	Route::resource('/year', 'YearController');
+        Route::resource('/semester', 'SemesterController');
+        Route::resource('/subject', 'SubjectController');
+        
+        Route::get('/post', 'PostController@index');
+
+        Route::get('/post/ajax-submenu', 'PostController@subMenu');
+        Route::get('/post/ajax-submenu2', 'PostController@subMenu2');
+
+        Route::delete('/post/delete/{filename}', [
+            'as' => 'deleteentry', 'uses' => 'PostController@delete']);
+        Route::get('/post/get/{filename}', [
+            'as' => 'getentry', 'uses' => 'PostController@get']);
+        Route::post('/post/add',[ 
+                'as' => 'addentry', 'uses' => 'PostController@add']);
+        Route::get('/post/edit/{id}',[
+            'as' => 'editentry', 'uses' => 'PostController@edit'
+            ]);
+        Route::put('/post/update/{id}',[
+            'as' => 'updateentry', 'uses' => 'PostController@update'
+            ]);
     });
 });
 

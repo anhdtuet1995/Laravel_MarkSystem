@@ -3,7 +3,6 @@
 @section('title') Users @stop
 
 @section('content')
-@role('admin')
 <div class="col-lg-10 col-lg-offset-1" >
     <h1><i class="fa fa-folder"></i> Quản lý file điểm </h1>
     <div class="table-responsive">
@@ -26,13 +25,29 @@
                     <td>{{ $entry->getSubject($entry->subject_id)->subject_title}}</td>
                     <td>{{ $entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title}}</td>
                     <td>{{ $entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->semester_title}}</td>
-                    <td><a href="{{url('admin/post/get/')."/".$entry->filename}}" title="">{{$entry->original_filename}}</a></td>
+                    <td>
+                        @role('admin')<a href="{{
+                        url('admin/post/get/')."/".$entry->filename
+                    }}" title="">{{$entry->original_filename}}</a>
+                    @endrole
+                    @role('teacher')<a href="{{
+                        url('teacher/post/get/')."/".$entry->filename
+                    }}" title="">{{$entry->original_filename}}</a>
+                    @endrole</td>
                     <td>{{ $entry->created_at->format('F d, Y h:ia') }}</td>
                     <td>
+                        @role('admin')
                         <a href="{{url('admin/post/edit')."/".$entry->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
-                        {{ Form::open(['url' => 'admin/post/' . $entry->id, 'method' => 'DELETE']) }}
+                        {{ Form::open(['url' => 'admin/post/delete'. '/' . $entry->filename, 'method' => 'DELETE']) }}
                         {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}
+                        @endrole
+                        @role('teacher')
+                        <a href="{{url('teacher/post/edit')."/".$entry->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
+                        {{ Form::open(['url' => 'teacher/post/delete'.'/' . $entry->filename, 'method' => 'DELETE']) }}
+                        {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
+                        {{ Form::close() }}
+                        @endrole
                     </td>
                 </tr>
                 @endforeach
@@ -53,8 +68,12 @@
         </ul>
     </div>
     
-
+    @role('admin')
     <form action="{{url('admin/post/add')}}" method="post" enctype="multipart/form-data">
+    @endrole
+    @role('teacher')
+    <form action="{{url('teacher/post/add')}}" method="post" enctype="multipart/form-data">
+    @endrole
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <h1><i class="fa fa-folder"></i> Tải lên file điểm </h1>
         Năm học: <select id="year" name="year" class="form-control">
@@ -111,6 +130,4 @@
 </script>
 
 
-
-@endrole
 @stop

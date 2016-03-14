@@ -68,6 +68,29 @@
 				</li>
 				@endrole
 				@role('teacher')
+				<li class=""><a href="{{url('/teacher/post')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Quản lý điểm</a></li>
+				<li class="parent ">
+					<a href="#">
+						<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Cập nhật CSDL 
+					</a>
+					<ul class="children collapse" id="sub-item-1">
+						<li>
+							<a class="" href="{{url('teacher/year')}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Quản lý năm học
+							</a>
+						</li>
+						<li>
+							<a class="" href="{{url('teacher/semester')}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Quản lý kỳ học
+							</a>
+						</li>
+						<li>
+							<a class="" href="{{url('teacher/subject')}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Quản lý các môn học
+							</a>
+						</li>
+					</ul>
+				</li>
 				@endrole
 			</ul>
 
