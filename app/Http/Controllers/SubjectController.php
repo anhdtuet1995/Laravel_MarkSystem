@@ -34,6 +34,7 @@ class SubjectController extends Controller
     	$subject = new Subject;
 
     	$subject->subject_title = $request->input('subject');
+        $subject->subject_code = $request->input('subject_code');
     	$subject->semester_id = $request->get('semester');
 
     	$subject->save();

@@ -33,6 +33,7 @@ class CreateFileTable extends Migration
         //create table for classes
         Schema::create('subjects', function(Blueprint $table){
             $table->increments('id');
+            $table->string('subject_code');
             $table->string('subject_title');
             $table->integer('semester_id')->unsigned();
             $table->timestamps();

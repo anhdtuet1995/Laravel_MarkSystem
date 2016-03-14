@@ -61,6 +61,11 @@
     </select>
 	
 	<div class='form-group'>
+        {{ Form::label('subject_code', 'Lớp môn học') }}
+        {{ Form::text('subject_code', null, ['placeholder' => 'Lớp môn học', 'class' => 'form-control']) }}
+    </div>
+
+	<div class='form-group'>
         {{ Form::label('subject', 'Môn học') }}
         {{ Form::text('subject', null, ['placeholder' => 'Môn học', 'class' => 'form-control']) }}
     </div>

@@ -103,7 +103,7 @@
             $('#subject').empty();
             $('#subject').append('<option value=0>Lựa chọn môn học</option>');
             $.each(data, function(index, subjectObj){
-                $('#subject').append('<option value='+subjectObj.id+'>'+subjectObj.subject_title+'</option>');
+                $('#subject').append('<option value='+subjectObj.id+'>'+subjectObj.subject_code+" "+subjectObj.subject_title+'</option>');
             });
         });
     });

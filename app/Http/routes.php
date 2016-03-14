@@ -1,9 +1,69 @@
 <?php
 
+use App\Year;
+use App\Semester;
+use App\Subject;
+use App\Fileentry;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Response;
 
 Route::get('/', function () {
-    return view('welcome');
+    $years = Year::all();
+    $semester = \Input::get('semester');
+    $results = Subject::all();
+    // $fileentries = array();
+    // foreach ($results as $re) {
+    //     $files = DB::table('fileentries')->where('subject_id', '=', $re->id)->get();
+    //     foreach ($files as $file) {
+    //         # code...
+    //         array_push($fileentries, $file);
+    //     }
+    // }
+    return view('welcome')->with([
+        'years' => $years,
+        //'fileentries' => $fileentries,
+        'results' => $results
+    ]);
 });
+
+Route::post('/search', function () {
+    $years = Year::all();
+    $semester = \Input::get('semester');
+    $mamh = \Input::get('mamh');
+    $results = Subject::where('semester_id', '=', $semester)->get();
+    $i = 0;
+    // $fileentries = array();
+    // foreach ($results as $re) {
+    //     $files = DB::table('fileentries')->where('subject_id', '=', $re->id)->get();
+    //     foreach ($files as $file) {
+    //         # code...
+    //         array_push($fileentries, $file);
+    //     }
+    // }
+    return view('welcome')->with([
+        'years' => $years,
+        //'fileentries' => $fileentries,
+        'results' => $results,
+        //'i' => $i
+    ]);
+});
+
+Route::get('/ajax-submenu', function(){
+    $year_id = Input::get('year_id');
+
+    $semesters = Semester::where('year_id', '=', $year_id)->get();
+    
+    return response()->json($semesters);
+});
+
+Route::get('/get/{filename}', function($filename){
+    $entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
+    $file = Storage::disk('local')->get($entry->filename);
+    
+    return (new Response($file, 200))
+        ->header('Content-Type', $entry->mime);
+});
+
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
@@ -44,3 +104,4 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 });
+
