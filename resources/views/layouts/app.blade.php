@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
+    <link rel="stylesheet" href="{{URL::asset('assets/css/footer-distributed-with-address-and-phones.css')}}">
+        
+    <link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('assets/css/datepicker3.css')}}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
-
-    <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <!--Icons-->
+    <script src="{{URL::asset('assets/js/lumino.glyphs.js')}}"></script>
 
     <style>
         body {
@@ -22,6 +22,14 @@
 
         .fa-btn {
             margin-right: 6px;
+        }
+
+        footer{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: red;
         }
     </style>
 </head>
@@ -74,5 +82,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
 </body>
+@include('includes.footer')
 </html>

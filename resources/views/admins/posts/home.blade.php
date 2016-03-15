@@ -4,6 +4,16 @@
 
 @section('content')
 <div class="col-lg-10 col-lg-offset-1" >
+    @if(Session::has('flash_message_success'))
+        <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+    @endif
+
+    @if(Session::has('flash_message_fail'))
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        {!! session('flash_message_fail') !!}
+    </div>
+    @endif
+
     <h1><i class="fa fa-folder"></i> Quản lý file điểm </h1>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -97,7 +107,11 @@
 </div>
 
 
+
 <script type="text/javascript" charset="utf-8" async defer>
+    
+    $('div.alert').delay(5000).slideUp(300);
+    
     $('#year').on('change', function(e){
         console.log(e);
 

@@ -66,24 +66,35 @@ class PostController extends Controller
 		$filename = \Input::get('name');
 		$file = \Input::file('filefield');
 		$extension = $file->getClientOriginalExtension();
-		Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
-		$entry = new Fileentry();
-		$entry->mime = $file->getClientMimeType();
-		if(!empty($filename)){
-			$entry->original_filename = $filename;
-		} 
-		else{
-			$entry->original_filename = $file->getClientOriginalName();
+		if(!Subject::find($subject_id)->hasMark()){
+			Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
+			$entry = new Fileentry();
+			$entry->mime = $file->getClientMimeType();
+			if(!empty($filename)){
+				$entry->original_filename = $filename;
+			} 
+			else{
+				$entry->original_filename = $file->getClientOriginalName();
+			}
+			$entry->filename = $file->getFilename().'.'.$extension;
+			$entry->subject_id = $subject_id;
+			$entry->save();	
+			\Session::flash('flash_message_success','Thêm file thành công!');
+			if(Auth::user()->hasRole('admin')){
+				return redirect('admin/post');	
+			}
+			else{
+				return redirect('teacher/post');
+			}
 		}
-		$entry->filename = $file->getFilename().'.'.$extension;
-		$entry->subject_id = $subject_id;
-		$entry->save();
-
-		if(Auth::user()->hasRole('admin')){
-			return redirect('admin/post');	
-		}
 		else{
-			return redirect('teacher/post');
+			\Session::flash('flash_message_fail','Thêm file không thành công! Môn học này đã có điểm!');
+			if(Auth::user()->hasRole('admin')){
+				return redirect('admin/post');	
+			}
+			else{
+				return redirect('teacher/post');
+			}
 		}
 		
 	}

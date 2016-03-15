@@ -4,7 +4,7 @@
 	<span class="icon-bar"></span>
 	<span class="icon-bar"></span>
 </button>
-<a class="navbar-brand" href="#">ĐIỂM THI<span>UET</span></a>
+<a class="navbar-brand" href="{{url('home')}}">ĐIỂM THI<span>UET</span></a>
 <ul class="user-menu">
 	<li class="dropdown pull-right">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ Auth::user()->name }} <span class="caret"></span></a>
