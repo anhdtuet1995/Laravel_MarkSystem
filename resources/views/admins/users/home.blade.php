@@ -33,10 +33,14 @@
                     @endif
                     </td>
                     <td>
+                        @if($user->hasRole('admin'))
+                        <a href="{{url('admin/user') .'/'. $user->id . '/edit'}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
+                        @else
                         <a href="{{url('admin/user') .'/'. $user->id . '/edit'}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
                         {{ Form::open(['url' => 'admin/user/' . $user->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}
+                        @endif
                     </td>
                 </tr>
                 @endforeach

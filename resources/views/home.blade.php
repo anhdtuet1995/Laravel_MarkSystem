@@ -15,7 +15,6 @@
         margin-top: 60px;
     }
     .box-icon {
-        background-color: #57a544;
         border-radius: 50%;
         display: table;
         height: 100px;
@@ -59,7 +58,7 @@
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box">
                 <div class="box-icon">
-                    <span class="fa fa-4x fa-html5"></span>
+                    <span class=""><img src="{{url('http://www2.uet.vnu.edu.vn/coltech/sites/uet_logo.png')}}" alt=""></span>
                 </div>
                 <div class="info">
                     <h4 class="text-center">Title</h4>

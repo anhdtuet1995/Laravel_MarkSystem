@@ -1,7 +1,17 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@if(Session::has('flash_message_success'))
+        <div class="alert alert-success"><strong> {!! session('flash_message') !!}</strong></div>
+    @endif
+
+    @if(Session::has('flash_message_fail'))
+    <div class="alert alert-warning alert-dismissible" role="alert"><strong>
+        {!! session('flash_message_fail') !!}</strong>
+    </div>
+    @endif
 <div class="col-lg-5 col-lg-offset-1" >
+
     <h1><i class="fa fa-folder"></i> Quản lý năm học </h1>
     {{ Form::open(['method' => 'DELETE']) }}
     <div class="table-responsive">
@@ -75,4 +85,7 @@
 
     {{ Form::close() }}
 </div>
+<script>
+	$('div.alert').delay(5000).slideUp(300);
+</script>
 @stop

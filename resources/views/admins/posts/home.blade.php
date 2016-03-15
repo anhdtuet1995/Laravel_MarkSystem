@@ -5,12 +5,12 @@
 @section('content')
 <div class="col-lg-10 col-lg-offset-1" >
     @if(Session::has('flash_message_success'))
-        <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+        <div class="alert alert-success"><strong> {!! session('flash_message') !!}</strong></div>
     @endif
 
     @if(Session::has('flash_message_fail'))
-    <div class="alert alert-warning alert-dismissible" role="alert">
-        {!! session('flash_message_fail') !!}
+    <div class="alert alert-warning alert-dismissible" role="alert"><strong>
+        {!! session('flash_message_fail') !!}</strong>
     </div>
     @endif
 
@@ -33,7 +33,7 @@
                 
                 <tr> 
                     <td>{{ $entry->getSubject($entry->subject_id)->subject_title}}</td>
-                    <td>{{ $entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title}}</td>
+                    <td><?php echo $entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title."-".(intval($entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title)+1) ?></td>
                     <td>{{ $entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->semester_title}}</td>
                     <td>
                         @role('admin')<a href="{{
@@ -89,7 +89,8 @@
         Năm học: <select id="year" name="year" class="form-control">
         <option value="0">Lựa chọn năm học</option>
         @foreach($years as $year)
-        <option value="{{$year->id}}">{{$year->year_title}}</option>
+        <option value="{{$year->id}}"
+        ><?php echo $year->year_title."-".(intval($year->year_title)+1) ?> </option>
         @endforeach
         </select><br>
         Kỳ học: <select name="semester" id="semester" class="form-control">
@@ -111,7 +112,7 @@
 <script type="text/javascript" charset="utf-8" async defer>
     
     $('div.alert').delay(5000).slideUp(300);
-    
+
     $('#year').on('change', function(e){
         console.log(e);
 

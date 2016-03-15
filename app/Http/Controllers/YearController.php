@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 use Auth;
 use App\Fileentry;
 use App\Year;
@@ -31,11 +32,25 @@ class YearController extends Controller
     }
 
     public function store(Request $request){
-    	$year = new Year;
+    	$years = Year::where('year_title', '=', $request->input('year'))->get();
+        $i = 0; 
+        foreach($years as $y){
+            $i++;
+        }
+        if($i == 0){
+            $year = new Year;
 
-    	$year->year_title = $request->input('year');
-    	$year->save();
+            $year->year_title = $request->input('year');
+            
+            $year->save();
+            
+            \Session::flash('flash_message_success', 'Thêm năm học thành công!');
+        }   
 
+        else{
+            \Session::flash('flash_message_fail', 'Thêm năm học thất bại!');
+        }
+        
     	if(Auth::user()->hasRole('admin')){
             return redirect('admin/year');  
         }

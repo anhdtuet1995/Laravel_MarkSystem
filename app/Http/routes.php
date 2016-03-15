@@ -30,19 +30,24 @@ Route::post('/search', function () {
     $years = Year::all();
     $semester = \Input::get('semester');
     $mamh = \Input::get('mamh');
-    if($mamh == null) $results = Subject::where('semester_id', '=', $semester)->get();
-    else{
+    $tenmh = \Input::get('tenmh');
+    if($mamh == null && $tenmh == null) $results = Subject::where('semester_id', '=', $semester)->get();
+    elseif($mamh != null && $tenmh == null){
         $results = Subject::where('semester_id', '=', $semester)->where('subject_code', 'like', '%'.$mamh.'%')->get();
     }
+    elseif($mamh == null && $tenmh != null){
+        $results = Subject::where('semester_id', '=', $semester)->where('subject_title', 'like', '%'.$tenmh.'%')->get();
+    }
+    else{
+        $results = Subject::where('semester_id', '=', $semester)->where('subject_code', 'like', '%'.$mamh.'%')->where('subject_title', 'like', '%'.$tenmh.'%')->get();
+    }
     $i = 0;
-    // $fileentries = array();
-    // foreach ($results as $re) {
-    //     $files = DB::table('fileentries')->where('subject_id', '=', $re->id)->get();
-    //     foreach ($files as $file) {
-    //         # code...
-    //         array_push($fileentries, $file);
-    //     }
-    // }
+    foreach ($results as $result) {
+        $i++;
+    }
+    if($i == 0){
+        \Session::flash('flash_message_empty', 'Không có dữ liệu!');
+    }
     return view('welcome')->with([
         'years' => $years,
         //'fileentries' => $fileentries,

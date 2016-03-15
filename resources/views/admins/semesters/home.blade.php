@@ -21,7 +21,8 @@
 					<td><input type="checkbox" name="selectMany[]" value="{{$sem->id}}"></td>
 					<td>{{$i++}}</td>
 					<td>{{$sem->semester_title}}</td>
-					<td>{{$sem->getYear($sem->year_id)->year_title}}</td>
+					<td><?php echo $sem->getYear($sem->year_id)->year_title ."-".(intval($sem->getYear($sem->year_id)->year_title)+1) ?>
+					</td>
 					<td>@role('admin')
 						<a href="{{url('admin/semester/edit')."/".$sem->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
 			            {{ Form::open(['url' => 'admin/semester/' . $sem->id, 'method' => 'DELETE']) }}
@@ -65,8 +66,8 @@
     Lựa chọn học kỳ:
     <select class='form-control' name="year" >
     	@foreach($years  as $year)
-		<option value="{{$year->id}}">{{$year->year_title}}</option>}
-		option
+		<option value="{{$year->id}}"
+><?php echo $year->year_title."-".(intval($year->year_title)+1) ?> </option>
     	@endforeach
     </select>
 	

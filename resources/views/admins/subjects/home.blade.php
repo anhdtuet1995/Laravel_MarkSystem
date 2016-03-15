@@ -23,7 +23,7 @@
 					<td>{{$i++}}</td>
 					<th>{{$subject->subject_title}}</th>
 					<td>{{$subject->getSemester($subject->semester_id)->semester_title}}</td>
-					<td>{{$subject->getSemester($subject->semester_id)->getYear($subject->getSemester($subject->semester_id)->year_id)->year_title}}</td>
+					<td><?php echo $subject->getSemester($subject->semester_id)->getYear($subject->getSemester($subject->semester_id)->year_id)->year_title."-".(intval($subject->getSemester($subject->semester_id)->getYear($subject->getSemester($subject->semester_id)->year_id)->year_title)+1) ?></td>
 					<td>
 						<a href="{{url('admin/subject/edit')."/".$subject->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
 			            {{ Form::open(['url' => 'admin/subject/' . $subject->id, 'method' => 'DELETE']) }}
@@ -72,7 +72,8 @@
 	Lựa chọn năm học:
     <select class='form-control' name="year" id="year">
     	@foreach($years as $year)
-		<option value="{{$year->id}}">{{$year->year_title}}</option>}
+		<option value="{{$year->id}}"
+            ><?php echo $year->year_title."-".(intval($year->year_title)+1) ?> </option>
     	@endforeach
     </select>
     Lựa chọn học kỳ:

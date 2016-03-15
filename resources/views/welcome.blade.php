@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+    @if(Session::has('flash_message_empty'))
+        <div class="alert alert-warning alert-dismissible" role="alert"><strong> {!! session('flash_message_empty') !!}</strong></div>
+    @endif
+
     <div class="row">
         <form action="{{url('/search')}}" method="post" accept-charset="utf-8">
             <div class="col-md-10 col-md-offset-1">
@@ -9,27 +13,36 @@
                 <div class="panel-heading">Tra cứu điểm thi</div>
 
                 <div class="panel-body">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         Năm học:
                         <select name="year" id="year" class="form-control">
                             @foreach($years as $year)
                             <option value="{{$year->id}}"
-                                <?php if(isset($_POST['year']) && $_POST['year'] == '{{$year->id}}') echo ' selected="selected"';?>>{{$year->year_title}}</option>
+                                ><?php echo $year->year_title."-".(intval($year->year_title)+1) ?> </option>
                             @endforeach
                         </select>    
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         Kỳ học: 
                         <select name="semester" id="semester" class="form-control">
                             <option value="1">Học kỳ một</option>
                         </select>    
                     </div>
-                    <div class="col-md-4">
-                        Nhập môn học cần tìm: 
+                    <div class="col-md-3">
+                        Nhập mã môn học cần tìm: 
                         <input class="form-control" type="text" name="mamh" value="" placeholder="">
-                        <button type="submit">Submit</button>
+                        
                     </div>
+                    <div class="col-md-3">
+                        Nhập tên môn học cần tìm: 
+                        <input class="form-control" type="text" name="tenmh" value="" placeholder="">
+                        
+                    </div>               
                 </div>
+                <div class="col-md-12" align="middle">
+                        <button type="submit">Tìm kiếm</button>
+                    </div>
+                <br><br>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
@@ -55,9 +68,7 @@
                                             <?php echo "Chưa có điểm" ?>
                                         @endif
                                     </td>
-                                    {{-- <td><a href="{{url('/get/')."/".$file->filename}}" title="">{{$file->original_filename}}</a></td>
                                     
-                                     </tr> --}}
                                  </tr>
                                     @endforeach
                                
@@ -74,6 +85,8 @@
     </div>
 </div>
 <script type="text/javascript" charset="utf-8" async defer>
+    $('div.alert').delay(5000).slideUp(300);
+
     $('#year').on('change', function(e){
         console.log(e);
 
