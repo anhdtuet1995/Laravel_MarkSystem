@@ -6,10 +6,12 @@
 
 <div class='col-lg-4 col-lg-offset-4'>
 
-    @if ($errors->has())
-        @foreach ($errors->all() as $error)
-            <div class='bg-danger alert'>{{ $error }}</div>
-        @endforeach
+   @if ($errors->has())
+        <ul class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach    
+        </ul>
     @endif
 
     <h1><i class='fa fa-user'></i> Sửa thông tin giáo viên</h1>

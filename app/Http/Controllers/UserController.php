@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Controllers\Controller;
 use Hash;
 
@@ -25,7 +26,7 @@ class UserController extends Controller
     	return view('admins.users.create');
     }
 
-    public function store(Request $request){
+    public function store(CreateUserRequest $request){
     	$user = new User;
 
     	$user->name = $request->input('name');
@@ -42,7 +43,7 @@ class UserController extends Controller
     	return view('admins.users.edit', ['user' => $user]);
     }
 
-    public function update(Request $request, $id){
+    public function update(CreateUserRequest $request, $id){
     	$user = User::find($id);
 
     	$user->name = $request->input('name');
