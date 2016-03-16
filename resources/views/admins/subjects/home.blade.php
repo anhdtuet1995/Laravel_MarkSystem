@@ -25,7 +25,6 @@
 					<td>{{$subject->getSemester($subject->semester_id)->semester_title}}</td>
 					<td><?php echo $subject->getSemester($subject->semester_id)->getYear($subject->getSemester($subject->semester_id)->year_id)->year_title."-".(intval($subject->getSemester($subject->semester_id)->getYear($subject->getSemester($subject->semester_id)->year_id)->year_title)+1) ?></td>
 					<td>
-						<a href="{{url('admin/subject/edit')."/".$subject->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
 			            {{ Form::open(['url' => 'admin/subject/' . $subject->id, 'method' => 'DELETE']) }}
 			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
 			            {{ Form::close() }}
@@ -38,7 +37,7 @@
 					<td>{{$subject->getSemester($subject->semester_id)->semester_title}}</td>
 					<td>{{$subject->getSemester($subject->semester_id)->getYear($subject->getSemester($subject->semester_id)->year_id)->year_title}}</td>
 					<td>
-						<a href="{{url('teacher/subject/edit')."/".$subject->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
+						
 			            {{ Form::open(['url' => 'teacher/subject/' . $subject->id, 'method' => 'DELETE']) }}
 			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
 			            {{ Form::close() }}

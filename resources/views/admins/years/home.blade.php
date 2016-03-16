@@ -31,7 +31,6 @@
 					<td>{{$i++}}</td>
 					<td>{{$year->year_title}}</td>
 					<td>
-						<a href="{{url('admin/year/edit')."/".$year->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
 			            {{ Form::open(['url' => 'admin/year/' . $year->id, 'method' => 'DELETE']) }}
 			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
 			            {{ Form::close() }}
@@ -42,7 +41,6 @@
 					<td>{{$i++}}</td>
 					<td>{{$year->year_title}}</td>
 					<td>
-						<a href="{{url('teacher/year/edit')."/".$year->id}} " class="btn btn-info pull-left" style="margin-right: 3px;">Sửa</a>
 			            {{ Form::open(['url' => 'teacher/year/' . $year->id, 'method' => 'DELETE']) }}
 			            {{ Form::submit('Xóa', ['class' => 'btn btn-danger'])}}
 			            {{ Form::close() }}

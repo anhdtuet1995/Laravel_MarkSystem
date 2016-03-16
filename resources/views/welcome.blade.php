@@ -16,6 +16,8 @@
                     <div class="col-md-3">
                         Năm học:
                         <select name="year" id="year" class="form-control">
+                            <option value="0"
+                                >Lựa chọn năm học </option>
                             @foreach($years as $year)
                             <option value="{{$year->id}}"
                                 ><?php echo $year->year_title."-".(intval($year->year_title)+1) ?> </option>
