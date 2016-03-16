@@ -8,6 +8,7 @@
 
     <div class="row">
         <form action="{{url('/search')}}" method="post" accept-charset="utf-8">
+            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
             <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Tra cứu điểm thi</div>
@@ -42,7 +43,7 @@
                     </div>               
                 </div>
                 <div class="col-md-12" align="middle">
-                        <button type="submit">Tìm kiếm</button>
+                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                     </div>
                 <br><br>
                 <div class="panel-body">

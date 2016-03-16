@@ -7,7 +7,11 @@ use App\Fileentry;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Response;
 
-Route::get('/', function () {
+
+
+
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', function () {
     $years = Year::all();
     $semester = \Input::get('semester');
     $results = Subject::where('semester_id', '=', $semester)->get();
@@ -71,9 +75,7 @@ Route::get('/get/{filename}', function($filename){
     return (new Response($file, 200))
         ->header('Content-Type', $entry->mime);
 });
-
-
-Route::group(['middleware' => 'web'], function () {
+    
     Route::auth();
 
     Route::get('/home', 'HomeController@index');

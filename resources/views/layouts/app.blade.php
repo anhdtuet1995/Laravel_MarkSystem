@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <!--Icons-->
     <script src="{{URL::asset('assets/js/lumino.glyphs.js')}}"></script>
-
+    
     <style>
         body {
             font-family: 'Lato';
@@ -31,10 +31,15 @@
             width: 100%;
             background-color: red;
         }
+        
+        .navbar-header .navbar-brand span {
+            color: #30a5ff;
+        }
+
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -47,9 +52,19 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Trang chủ
-                </a>
+                <a class="navbar-brand" href="{{url('home')}}">ĐIỂM THI<span>UET</span></a>
+                <ul class="nav navbar-nav">
+                    <li>
+                        @if(Auth::check())
+                            @if(Auth::user()->hasRole('admin'))
+                                <a href="{{ url('/admin/user') }}">Trang quản lý</a>
+                            @else
+                                <a href="{{ url('/teacher/post') }}">Trang quản lý</a>
+                            @endif
+                        @endif
+                    </li>
+                </ul>
+                
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -63,9 +78,9 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                     @else
                         <li class="dropdown pull-right">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> {{ "a" }} <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ Auth::user()->name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+                                <li><a href="{{ url('/logout') }}">Logout</a></li>
                             </ul>
                         </li>
                     @endif
