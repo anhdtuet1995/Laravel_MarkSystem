@@ -20,6 +20,7 @@
 
             <thead>
                 <tr>
+                    <th>Lớp môn học</th>
                     <th>Môn học</th>
                     <th>Năm học</th>
                     <th>Học kỳ</th>
@@ -32,6 +33,7 @@
                 @foreach($entries as $entry)
                 
                 <tr> 
+                    <td>{{ $entry->getSubject($entry->subject_id)->subject_code}}</td>
                     <td>{{ $entry->getSubject($entry->subject_id)->subject_title}}</td>
                     <td><?php echo $entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title."-".(intval($entry->getYear($entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->year_id)->year_title)+1) ?></td>
                     <td>{{ $entry->getSemester($entry->getSubject($entry->subject_id)->semester_id)->semester_title}}</td>

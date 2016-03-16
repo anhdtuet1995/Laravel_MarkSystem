@@ -84,6 +84,7 @@ class DatabaseSeeder extends Seeder
       ]);
 
       DB::table('subjects')->insert([
+        'subject_code' => 'INT3108 1',
         'subject_title' => 'Lập trình hệ thống nhúng',
         'semester_id' => '1',
       ]);      
